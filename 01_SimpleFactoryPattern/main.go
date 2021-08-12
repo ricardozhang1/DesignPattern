@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 // 1.定义接口
 type SimpleAPI interface {
@@ -25,21 +28,27 @@ func (e *English) Say(content string) string {
 }
 
 // 3.调用对应的方法
-func NewAPI(apiName string) SimpleAPI {
+func NewAPI(apiName string) (SimpleAPI, error) {
 	if apiName == "cn" {
-		return &Chinese{}
+		return &Chinese{}, nil
 	} else if apiName == "en" {
-		return &English{}
+		return &English{}, nil
 	}
-	return nil
+	return nil, fmt.Errorf("param is not exists, please make sure")
 }
 
 func main() {
-	newAPI := NewAPI("cn")
+	newAPI, err := NewAPI("cn")
+	if err != nil {
+		log.Fatal(err)
+	}
 	res := newAPI.Say("你好")
 	fmt.Println("调用结果：", res)
 
-	newAPI = NewAPI("en")
+	newAPI, err = NewAPI("en")
+	if err != nil {
+		log.Fatal(err)
+	}
 	res = newAPI.Say("hello")
 	fmt.Println("调用结果：", res)
 }

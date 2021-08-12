@@ -27,6 +27,7 @@ func (o *OperatorBase) SetB(b int) {
 	o.b = b
 }
 
+
 //PlusOperatorFactory是PlusOperator(加操作)的工厂类
 type PlusOperatorFactory struct {}
 
@@ -45,6 +46,7 @@ type PlusOperator struct {
 func (p *PlusOperator) Result() int {
 	return p.a + p.b
 }
+
 
 //MinusOperatorFactory 是 MinusOperator 的工厂类
 type MinusOperatorFactory struct {}
